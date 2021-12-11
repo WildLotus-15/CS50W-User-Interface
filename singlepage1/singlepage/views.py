@@ -8,7 +8,7 @@ def index(request):
 
 texts = ["aleko midis mamukastan",
         "mamuka midis mananastan",
-        "mananas mostyvnia kargis traki"]
+        "manana elodeba stumrebs"]
 
 def section(request, num):
     if 1 <= num <= 3:
