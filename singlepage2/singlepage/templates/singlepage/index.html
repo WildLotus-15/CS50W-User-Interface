@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Single Page</title>
+    <style></style>
+    <script>
+        function showSection(section) {
+            // window onpopstate means when i pop off something from a history & go back in my history
+            // then i will console log the state which was stored associated with that part of the user's history
+            // and then i will show that section via defined function
+            window.onpopstate = function(event) {
+                console.log(event.state.section)
+                showSection(event.state.section)
+            } 
+
+
+            fetch(`/sections/${section}`)
+                .then(response => response.text())
+                .then(text => {
+                    console.log(text)
+                    document.querySelector('#content').innerHTML = text
+                })
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('button').forEach(button => {
+                button.onclick = function () {
+                    const section = this.dataset.section
+                    history.pushState({section: section}, "", `section${section}`)
+                    // history pushtate adds an element to users browser history where i first specify any data associated with this state in this case section number represented in javascript object
+                    // next is title parameter which is ig  nored by most of the web browsers so that generally can be an empty string
+                    // third argument is what should go in the URL an I want the section specified with section number
+                    showSection(section)
+                }
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <h1>Hello!</h1>
+    <button data-section="1">Section 1</button>
+    <button data-section="2">Section 2</button>
+    <button data-section="3">Section 3</button>
+    <div id="content"></div>
+</body>
+
+</html>
