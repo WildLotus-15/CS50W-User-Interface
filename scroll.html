@@ -6,9 +6,9 @@
             // onscroll is an event which listens when the user is scrolling throught window
             window.onscroll = () => {
                 // innerHeight means the height of the window itself 
-                // scrollY means the amount that user scrolled 
-                // document.body.offsetHeight means the bottom of the body  
-                if (window.innerHeight + window.scrollY >= document.body.offsetHeight)
+                // scrollY means the amount of pixels far down have user scrolled in the Y direction
+                // document.body.offsetHeight means the entire height of the page  
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight) // window represents physical window on computer screen that displays all of the web content // document represents entire web page so if web page is long it doesn't fit entirely on the window, you have to scroll throught entire page
                 // so when users reaches the end of the page this function will be activated
                 {
                     document.querySelector('body').style.background = "green"
