@@ -4,10 +4,25 @@
 <head>
     <title>Posts</title>
     <style>
+        @keyframes hide {
+            /* Opacity is a CSS property that controls how opaque or how transparent an HTML element happens to be */
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+
         .post {
             background-color: #77dd11;
             padding: 20px;
-            margin: 10px
+            margin: 10px;
+            animation-name: hide;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            animation-play-state: paused
         }
 
         body {
@@ -55,8 +70,12 @@
             const element = event.target
             if (element.className === "hide") {
                 // element.remove()
-                // removing parent element
-                element.parentElement.remove()
+                // removing parent element with element.parentElement.remove()
+                element.parentElement.style.animationPlayState = 'running'
+                // when animation will end
+                element.parentElement.addEventListener('animationend', () => {
+                    element.parentElement.remove()
+                })
             }
         })
     </script>
