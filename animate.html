@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Animate</title>
+    <style>
+        @keyframes move {
+
+            /* keyframes will help to specify some key from for this particular element meaning where should element start what should it style properties be */
+            /* from means what should be its initial properties be */
+            /* 0% means when you are at 0% of an animation aka starting point*/
+            /* from {
+                font-size: 10px
+            }
+            to {
+                font-size: 100px
+            } */
+            /* from {
+                left: 0%
+            }
+            to {
+                left: 30%
+            } */
+            0% {
+                left: 0%
+            }
+
+            50% {
+                left: 30%;
+            }
+
+            100% {
+                left: 0%
+            }
+        }
+
+        h1 {
+            position: relative;
+            animation-name: move;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+            /* animation fill mode means in what direction should animation move */
+            animation-iteration-count: 2;
+            /* means to run animation not once but twice */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const h1 = document.querySelector('h1')
+            h1.style.animationPlayState = "paused"
+            // play state defines status of the animation is it running or stopped
+
+            document.querySelector('button').onclick = function () {
+                if (h1.style.animationPlayState === 'paused') {
+                    h1.style.animationPlayState = 'running'
+                } else {
+                    h1.style.animationPlayState = 'paused'
+                }
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <h1>Welcome!</h1>
+    <button>Click Here!</button>
+</body>
+
+</html>

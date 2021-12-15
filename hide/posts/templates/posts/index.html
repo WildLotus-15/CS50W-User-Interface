@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Posts</title>
+    <style>
+        .post {
+            background-color: #77dd11;
+            padding: 20px;
+            margin: 10px
+        }
+
+        body {
+            margin-bottom: 50px
+        }
+
+        .hide {
+            float: right
+        }
+    </style>
+    <script>
+        let counter = 0;
+
+        const quantity = 20;
+
+        function load() {
+            const start = counter
+            const end = start + quantity - 1
+            counter = end + 1
+
+            fetch(`/posts?start=${start}&end=${end}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.posts.forEach(add_post)
+                })
+        }
+
+        function add_post(sections) {
+            const post = document.createElement('div')
+            post.className = "post"
+            post.innerHTML = `${sections} <button class='hide'>Hide</button>`
+
+            document.querySelector('#posts').append(post)
+        }
+
+        document.addEventListener('DOMContentLoaded', load)
+
+        window.onscroll = () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                load()
+            }
+        }
+
+        document.addEventListener('click', event => {
+            const element = event.target
+            if (element.className === "hide") {
+                // element.remove()
+                // removing parent element
+                element.parentElement.remove()
+            }
+        })
+    </script>
+</head>
+
+<body>
+    <div id="posts"></div>
+</body>
+
+</html>
